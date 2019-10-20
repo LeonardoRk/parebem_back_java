@@ -1,0 +1,39 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>reserva</groupId>
+  <artifactId>reserva</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>reserva</name>
+  <description>projeto back end </description>
+  <dependencies>
+  	<dependency>
+		<groupId>org.glassfish.jersey.core</groupId>
+		<artifactId>jersey-server</artifactId>
+		<version>2.17</version>
+	</dependency>
+	<!-- Thanks for using https://jar-download.com -->
+	<!-- https://mvnrepository.com/artifact/org.glassfish.jersey.containers/jersey-container-grizzly2-http -->
+	<dependency>
+	    <groupId>org.glassfish.jersey.containers</groupId>
+	    <artifactId>jersey-container-grizzly2-http</artifactId>
+	    <version>2.17</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+	<dependency>
+	    <groupId>com.google.code.gson</groupId>
+	    <artifactId>gson</artifactId>
+	    <version>2.8.6</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+	<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+	<dependency>
+	    <groupId>mysql</groupId>
+	    <artifactId>mysql-connector-java</artifactId>
+	    <version>5.1.6</version>
+	</dependency>
+	
+
+  </dependencies>
+  <build>
+  </build>
+</project>
