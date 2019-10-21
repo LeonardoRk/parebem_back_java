@@ -40,7 +40,7 @@ public class Dao {
     		importaInicializa();
     	}
         if(instance == null){
-        	String url = "jdbc:mysql://localhost:3306/controle";
+        	String url = "jdbc:mysql://localhost:3306/controle?useSSL=false";
         	try {
         		instance = DriverManager.getConnection(url, "root", "");
 	        }catch (SQLException ex) {
