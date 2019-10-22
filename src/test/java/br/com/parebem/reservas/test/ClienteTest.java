@@ -1,4 +1,4 @@
-package br.com.alura.loja;
+package br.com.parebem.reservas.test;
 
 import java.net.URI;
 
