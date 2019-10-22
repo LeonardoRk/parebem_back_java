@@ -12,7 +12,9 @@
 
         <!-- Aqui são listadas todas as entidades -->
         <class>br.com.parebem.reservas.modelo.User</class>
-
+        <class>br.com.parebem.reservas.modelo.Event</class>
+        
+        
         <properties>    
             <!-- Propriedades JDBC -->
             <property name="javax.persistence.jdbc.driver" 
