@@ -17,4 +17,4 @@ Após instalar o banco é hora de subir a API do back em Java. É necessário te
     
     
 O comando que inicia a aplicação na porta 8080 é o seguinte:
-> mvn exec:java -D"exec.mainClass"="br.com.parebem.reservas.Servidor"
+> mvn exec:java -D"exec.mainClass"="br.com.parebem.reservation.Server"
