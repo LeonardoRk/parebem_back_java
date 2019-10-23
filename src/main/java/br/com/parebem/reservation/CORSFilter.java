@@ -1,4 +1,4 @@
-package br.com.parebem.reservas;
+package br.com.parebem.reservation;
 
 import java.io.IOException;
 import javax.ws.rs.container.ContainerRequestContext;

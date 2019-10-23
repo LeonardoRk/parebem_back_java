@@ -1,4 +1,4 @@
-package br.com.parebem.reservas.modelo;
+package br.com.parebem.reservas.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,7 +13,7 @@ public class Login {
 		this.password = password;
 	}
 	
-	public String validaLogin() {
+	public String searchUser() {
 		String sql = "select nome, senha from usuario where nome=\"" + this.userName + 
 				"\" and senha=\"" + this.password + "\" ; ";
 		ArrayList<HashMap<String, String>> retorno = new ArrayList<HashMap<String, String>>();

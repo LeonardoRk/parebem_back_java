@@ -1,4 +1,4 @@
-package br.com.parebem.reservas.modelo;
+package br.com.parebem.reservas.model;
 
 import java.util.ArrayList;
 import java.util.Date;

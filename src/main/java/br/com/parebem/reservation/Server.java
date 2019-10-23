@@ -1,4 +1,4 @@
-package br.com.parebem.reservas;
+package br.com.parebem.reservation;
 
 import java.io.IOException;
 import java.net.URI;
@@ -24,12 +24,12 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 
-public class Servidor {
+public class Server {
 	
-	private static Runnable t1 = new Runnable() {
+	private static Runnable monitorOpenEvents = new Runnable() {
         public void run() {
             try{
-            	System.out.println("rodando thread");
+            	System.out.println("thread running");
             	long start = System.currentTimeMillis();
                 while(true) {
                 	long elapsedTimeMillis = System.currentTimeMillis()-start;
@@ -38,19 +38,19 @@ public class Servidor {
                 		start = System.currentTimeMillis();
                 		Client client = ClientBuilder.newClient();
                 		WebTarget target = client.target("http://localhost:8080");
-                		String conteudo = null;
-                		conteudo = target.path("/eventos/abertos").request().get(String.class);
+                		String content = null;
+                		content = target.path("/eventos/abertos").request().get(String.class);
                 		
                 		
                 		JsonParser jp = new JsonParser();
-                		Object obj = jp.parse(conteudo);
+                		Object obj = jp.parse(content);
                 		JsonArray jA = new JsonArray();
                 		jA = (JsonArray) obj;
                 		for(int i = 0 ; i < jA.size(); i++) {
                 			String ss = jA.get(i).toString();
                 			JsonObject json = new Gson().fromJson(ss, JsonObject.class);
-                			String momento = json.get("momento").toString();
-                			momento = momento.replace("\"", "");
+                			String expirationDate = json.get("momento").toString();
+                			expirationDate = expirationDate.replace("\"", "");
                 			
                 			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");  
                 			LocalDateTime now = LocalDateTime.now();  
@@ -59,7 +59,7 @@ public class Servidor {
                 			String pattern="yyyy-MM-dd HH:mm:ss.S";
                 			SimpleDateFormat formatter = new SimpleDateFormat(pattern);
                 			
-                			Date dateVencimento = formatter.parse(momento);
+                			Date dateVencimento = formatter.parse(expirationDate);
                 		
                 			String horaVencimento = formatter.format(dateVencimento);
 
@@ -88,10 +88,10 @@ public class Servidor {
 		ResourceConfig config = new ResourceConfig().packages("br.com.parebem.reservas");
 		config.register(new CORSFilter());
 		HttpServer server = GrizzlyHttpServerFactory.createHttpServer(uri, config);
-		System.out.println("Servidor rodando");
-		new Thread(t1).start();
+		System.out.println("Server running");
+		new Thread(monitorOpenEvents).start();
 		System.in.read();
-		System.out.println("servidor parando");
+		System.out.println("server stopping");
 		server.stop();	
 	}
 }
