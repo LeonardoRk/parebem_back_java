@@ -59,17 +59,19 @@ public class CadastraResource {
 		
 		for(int i = 0 ; i < allEvents.size(); i++) {
 			Event e = allEvents.get(i);
-			
+			System.out.println(e.getPlace());
 			Set<User> usersInEvent = e.getUserEvents();
 			for(User user: usersInEvent) {
+				System.out.println("\t\t" + user.getName());
 				object.add(user.toString());
 			}
 			json.addProperty(e.toString(), object.toString());
+			object.clear();
 		}
 		System.out.println("The json data");
 		System.out.println(json);
 		
-		return Response.ok(json).build();
+		return Response.ok(json.toString()).build();
 
 	}
 }
