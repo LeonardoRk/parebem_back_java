@@ -1,8 +1,10 @@
 package br.com.parebem.reservas.resource;
 
+
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -15,17 +17,18 @@ import javax.ws.rs.core.Response;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.mysql.fabric.xmlrpc.base.Array;
 
-import br.com.parebem.reservas.modelo.CadastraUsuariosEventos;
-import br.com.parebem.reservas.modelo.Evento;
-import br.com.parebem.reservas.modelo.Usuario;
+import br.com.parebem.reservas.dao.EventDao;
+import br.com.parebem.reservas.model.CadastraUsuariosEventos;
+import br.com.parebem.reservas.model.Event;
+import br.com.parebem.reservas.model.Evento;
+import br.com.parebem.reservas.model.User;
+import br.com.parebem.reservas.model.Usuario;
+import br.com.parebem.reservas.util.GeneralServices;
 
 @Path("cadastros")
 public class CadastraResource {
-	
-	private JsonObject getJson(String json) {
-		return new Gson().fromJson(json, JsonObject.class);
-	}
 	
 	@POST
 	@Path("usuarioseventos")
@@ -48,37 +51,25 @@ public class CadastraResource {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response infoPaginaEventos(){
-		Evento e = new Evento();
-		JsonArray idLocalEventos = e.localIdVencidoQtdPessoasEvento();
-
-		Usuario u = new Usuario();
-		String idNomeUsuarios = u.idNomeUsuarios();
 		
-		int qtdEventos = idLocalEventos.size();
-		JsonObject usuariosCadaEvento = new JsonObject();
+		EventDao dao = new EventDao();
+		List<Event> allEvents = dao.listAllEvents();
+		JsonObject json = new JsonObject();
+		ArrayList<String> object = new ArrayList<String>();
 		
-		for(int i = 0 ; i < qtdEventos; i++) {
-			System.out.println("i: " + i);
-			JsonObject eventoInfo = new Gson().fromJson(idLocalEventos.get(i).toString(), JsonObject.class);
-			System.out.println("evento info: " + eventoInfo);
+		for(int i = 0 ; i < allEvents.size(); i++) {
+			Event e = allEvents.get(i);
 			
-			String a = eventoInfo.get("id_evento").toString().replace("\"", "");
-			System.out.println("evento:" + a);
-			
-			int idEventoAux = Integer.parseInt(a);
-			usuariosCadaEvento.addProperty(a, CadastraUsuariosEventos.nomeUsuariosDoEvento(idEventoAux).toString());
-			
+			Set<User> usersInEvent = e.getUserEvents();
+			for(User user: usersInEvent) {
+				object.add(user.toString());
+			}
+			json.addProperty(e.toString(), object.toString());
 		}
-		System.out.println(usuariosCadaEvento);
+		System.out.println("The json data");
+		System.out.println(json);
 		
-		 
-		String re = "{";
-		re += "\"eventos\":" + idLocalEventos; 
-		re += ",\"usuarios\":" + idNomeUsuarios;
-		re += ",\"usuarios_evento\":" + usuariosCadaEvento;
-		re += "}";
-		System.out.println("objeto de retorno");
-		System.out.println(re);
-		return Response.ok(re).build();
+		return Response.ok(json).build();
+
 	}
 }

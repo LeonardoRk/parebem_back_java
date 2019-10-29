@@ -35,12 +35,12 @@ public class Dao {
 	
     public static Connection getInstance(){
     	if(!executado) {
-    		System.out.println("executando");
+    		System.out.println("executing");
     		executado = true;
     		importaInicializa();
     	}
         if(instance == null){
-        	String url = "jdbc:mysql://localhost:3306/controle?useSSL=false";
+        	String url = "jdbc:mysql://localhost:3306/novo_controle?useSSL=false";
         	try {
         		instance = DriverManager.getConnection(url, "root", "");
 	        }catch (SQLException ex) {

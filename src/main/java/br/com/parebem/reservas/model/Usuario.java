@@ -26,20 +26,6 @@ public class Usuario {
 		return new Gson().toJson(linhas);
 	}
 	
-	public String listaUsuarios() {
-		String sql = "select * from usuario;";
-		ArrayList<HashMap<String, String>> resultado = Dao.executaComando(sql);
-		return this.toJson(resultado);
-	}
-	
-	public String criarUsuario(String nome, String senha, String telefone) {
-		System.out.println("Modelo criar usuário");
-		String sql = "insert into usuario(nome, senha, telefone) values( '"+ 
-					nome + "' , '" + senha + "' , '" + telefone + "' );";
-		ArrayList<HashMap<String, String>> resultado = Dao.executaComando(sql);
-		return this.toJson(resultado);
-	}
-	
 	public String idNomeUsuarios() {
 		String sql = "select id_usuario, nome from usuario;";
 		ArrayList<HashMap<String, String>> resultado = Dao.executaComando(sql);

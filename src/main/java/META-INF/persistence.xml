@@ -14,14 +14,13 @@
         <class>br.com.parebem.reservas.modelo.User</class>
         <class>br.com.parebem.reservas.modelo.Event</class>
         
-        
         <properties>    
             <!-- Propriedades JDBC -->
             <property name="javax.persistence.jdbc.driver" 
                 value="com.mysql.jdbc.Driver" />
 
             <property name="javax.persistence.jdbc.url" 
-                value="jdbc:mysql://localhost/novo_controle" />
+                value="jdbc:mysql://localhost/novo_controle?useSSL=false" />
 
             <property name="javax.persistence.jdbc.user" value="root" />
             <property name="javax.persistence.jdbc.password" value="" />

@@ -56,27 +56,6 @@ public class Evento {
 		return new Gson().toJson(linhas);
 	}
 
-	public String listaEventos() {
-		String sql = "select * from evento;";
-		ArrayList<HashMap<String, String>> resultado = Dao.executaComando(sql);
-		return this.toString(resultado);
-	}
-	
-	public String listaEventosAbertos() {
-		String sql = "select * from evento where vencido=0;";
-		ArrayList<HashMap<String, String>> resultado = Dao.executaComando(sql);
-		return this.toString(resultado);
-	}
-	
-	
-	public String insereEvento() {
-		String sql = "insert into evento(momento, limite_convidados, local) values('"+
-					this.momento + "','" + this.limite_convidados 
-					+ "','" + this.local + "');";
-		ArrayList<HashMap<String, String>> resultado = Dao.executaComando(sql);
-		return this.toString(resultado);
-	}
-	
 	public JsonArray localIdVencidoQtdPessoasEvento() {
 		String sql = "select local, id_evento, vencido, limite_convidados from evento;";
 		ArrayList<HashMap<String, String>> resultado = Dao.executaComando(sql);
@@ -94,12 +73,5 @@ public class Evento {
 		}
 		System.out.println(ja);
 		return ja;
-	}
-	
-	public String venceEvento(int idEvento) {
-		String sql = "update evento set vencido=1 where id_evento=" + idEvento + ";";
-		ArrayList<HashMap<String, String>> resultado = Dao.executaComando(sql);
-		String jsonString = new Gson().toJson(resultado);
-		return jsonString;
 	}
 }
